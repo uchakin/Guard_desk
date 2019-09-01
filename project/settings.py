@@ -1,7 +1,9 @@
 import os
+from environs import Env
 from dotenv import load_dotenv
 
 load_dotenv()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -17,7 +19,9 @@ INSTALLED_APPS = ['datacenter']
 
 SECRET_KEY = 'REPLACE_ME'
 
-DEBUG = os.getenv('SITE_DEBUG_MODE')
+env = Env()
+env.read_env()
+DEBUG = env.bool('SITE_DEBUG_MODE')
 
 ROOT_URLCONF = "project.urls"
 
